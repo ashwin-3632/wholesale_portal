@@ -1,0 +1,114 @@
+[media pointer="file-service://file-G8aoDyzUbUSmqqLC2gR8Zu"]
+Wholesale Accounting Portal using Firebase (VS Code)
+-------------------------------------------------------------------
+- You are an expert Senior Developer with extensive experience building Full Stack webapps using Firebase - build a single-page (with multiple tabs if needed) wholesale accounting portal using Firebase.
+- The project will be developed using VS Code and hosted using Firebase Hosting.
+- It will use Firestore for data storage and optionally Firebase Authentication for secure access.
+- The portal must be responsive and have a clean, sleek interface — consider using Bootstrap/Plain CSS for styling. 
+
+Core Functional Requirements
+------------------------------
+- The system should allow creation, management, and printing of bills for wholesale business transactions.
+- Main entities: Parties (Customers) and Bills.
+- All operations should occur on a single-page UI (SPA-style) with multiple tabbed views as needed.
+
+Bill Format & Fields
+----------------------
+- Bill ID (unique, auto-generated)
+- Party Name
+- Date (with timestamp)
+- Phone Number
+- Address
+- Transport LR
+- Line items: S.No., Rate, Quantity, Total (Rate × Quantity), up to 30 items split across 2 columns
+- Bill Total (sum of all item totals)
+- Paid
+- Due (auto-calculated = Bill Total - Paid)
+- Status: Pending or Cleared (default = Pending)
+- Clearance Timestamp (captured when status set to Cleared)
+- Signature field (empty box for manual signature when printed)
+
+Functional Features
+---------------------
+- Add a new party (customer) to the system
+- Auto-fill party details when creating a new bill using phone number
+- Create and submit new bills
+- Print or download bills in A4 size with 2-column item layout
+- Filter/search bills by phone number, name, date, bill ID, or status
+- Mark multiple bills as 'Cleared' with clearance timestamp
+- View account dashboard per party showing: Total Billed, Paid, Due
+- All views should be integrated into a single responsive page with tabbed navigation
+- Styling should be sleek and user-friendly, preferably using Bootstrap/PlainCSS 
+
+Firebase Stack to Use
+-----------------------
+- Firestore: to store Parties and Bills data
+- Firebase Hosting: to host the static frontend built in HTML/CSS/JS (or framework like Vue/React)
+- Firebase Authentication (Optional): for login-based access control
+- Firebase Functions (Optional): for backend-like logic, if needed
+
+Data Structure in Firestore
+-----------------------------
+- Collection: 'parties'
+-  - Document ID: phone number (or auto ID)
+-  - Fields: name, address, totalBilled, totalPaid, totalDue
+- 
+- Collection: 'bills'
+-  - Document ID: auto-generated Bill ID
+-  - Fields: partyPhone, partyName, address, date, transportLR, items (array of {rate, qty, total}), billTotal, paid, due, status, clearanceTimestamp
+
+Frontend Expectations (to be built in VS Code)
+------------------------------------------------
+- Single HTML/JS/CSS page (or SPA framework)
+- Tabbed interface: Add Party | Create Bill | Search Bills | Dashboard
+- All views shown/hidden via JS (no page reloads)
+- Firestore JS SDK used for data reads/writes
+- Use html2pdf.js or browser print for PDF generation
+- Firebase Hosting used to deploy the static site
+- Use Bootstrap/Plain CSS to make it mobile-responsive and modern 
+
+Additional Notes
+-----------------------------
+- Help plan the full Firebase implementation in VS Code
+- Suggest efficient Firestore data modeling
+- Handle validation, status updates, PDF printing, and dashboard summaries
+- Provide sample code snippets or architectural guidance if needed
+- Ensure the project is maintainable, scalable, and responsive
+
+
+
+UI:
+-----------------------------
+Simple sleek responsive
+4 Tabs:
+Tab 1: Add Party
+-'Add Party' should include 'Party Name' text field, 'Phone Number' number field, 'Address' text field
+-'Add' button to add Party to the list of parties
+
+Tab 2: Create Bill
+-Fields: Phone Number(mandatory field), Party Name(should be auto filled/updated once phone number is entered), Transport LR, Address
+-Section 'Bill Items' below Party Details fields: this is a Table containing fields: S.No., Rate, Quantity, Total, Action(Remove button beside each row). By default there should be an empty row with S.No. 1.
+-Below 'Bill Items' table there should be an "Add Item" button that should allow to add new row i.e., item details with next S.No.
+-After Add Item button there should be three fields: Bill Total (shouldn't be allowed to be edited, sum of Total of all item rows), Paid Amount (in case any amount is paid it will be added here), Due Amount (be default entire Bill Total, but if anything is paid then the remaining amount will fall under Due Amount i.e., Due Amount = Bill Total - Pain Amount).
+
+- Once bill is created a preview of the bill should be shown with options to print or download as pdf. Check "Bill Format & Fields" section above to figure bill printable page layout.
+
+Tab 3: Search Bills tab
+-This tab should list all bills from most recent to oldest order by default.
+-On the top of this tab there should be option to search bills based on Phone Number, Party Name, Between Dates(to date & from date), Status dropdown (All, Pending, Cleared) then a "Filter" button
+-In the search result tabular list of bills, on the left side of each row there should be an option to select(checkbox), and multiple rows should be selected and their status should be allowed to clear (a "Mark Selected as Cleared" button on the top right of tabular list). Once the selected bills are marked as Cleared then their status should also change to "Cleared"
+
+Tab 4: Dashboard
+-This tab should show number of parties, Total Bills, Total Revenue(sum of all the Bills Amount), Due Amount. When anything is clicked detailed table should be shown related to that data aspect.
+
+
+Project naming details
+-----------------------------
+Project Folder: D:\wholesale_portal
+
+Firebase Project name: Wholesale Portal
+Firebase Project ID: portal-wholesale
+
+GitHub Repo: https://github.com/ashwin-3632/wholesale_portal.git
+
+

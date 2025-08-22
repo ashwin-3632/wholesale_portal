@@ -1,0 +1,289 @@
+/* === Base Styles === */
+body {
+  background-color: #f8f9fa;
+}
+
+.nav-tabs .nav-link {
+  cursor: pointer;
+}
+
+.tab-content {
+  border: 1px solid #dee2e6;
+  border-top: none;
+  background-color: #fff;
+  padding: 20px;
+  min-height: 300px;
+}
+
+#bill-viewer-page {
+  display: none;
+}
+
+.stat-box {
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.table input.form-control {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.remove-item {
+  font-size: 1.1em;
+  padding: 0.25rem 0.5rem;
+  line-height: 1;
+}
+
+/* === Bill Item Table Responsiveness === */
+@media (max-width: 767.98px) {
+  #bill-items-table th,
+  #bill-items-table td {
+    padding: 0.4rem;
+    font-size: 0.8rem;
+  }
+
+  #bill-items-table th:nth-child(2),
+  #bill-items-table td:nth-child(2) input {
+    min-width: 65px;
+  }
+  #bill-items-table th:nth-child(3),
+  #bill-items-table td:nth-child(3) input {
+    min-width: 55px;
+  }
+  #bill-items-table th:nth-child(4),
+  #bill-items-table td:nth-child(4) input {
+    min-width: 75px;
+  }
+
+  #bill-items-table td:nth-child(5) .remove-item {
+    min-width: 40px;
+  }
+}
+
+/* === Thermal Print Style === */
+.bill-content-wrapper.thermal-print-style {
+  font-family: 'monospace', 'Courier New', Courier, monospace;
+  font-size: 9pt;
+  line-height: 1.2;
+  padding: 0;
+  margin: 0;
+}
+
+.bill-content-wrapper.thermal-print-style h3,
+.bill-content-wrapper.thermal-print-style h4 {
+  font-size: 10pt;
+  margin-bottom: 5px !important;
+}
+
+.bill-content-wrapper.thermal-print-style hr {
+  border-top: 1px dashed #000 !important;
+  margin: 5px 0 !important;
+}
+
+.bill-content-wrapper.thermal-print-style strong {
+  font-weight: bold;
+}
+
+.bill-content-wrapper.thermal-print-style div {
+  margin-bottom: 5px;
+}
+
+.bill-content-wrapper.thermal-print-style table {
+  margin-bottom: 5px;
+}
+
+.bill-content-wrapper.thermal-print-style table th,
+.bill-content-wrapper.thermal-print-style table td {
+  padding: 2px 3px;
+  border: none !important;
+  font-size: 9pt;
+}
+
+.bill-content-wrapper.thermal-print-style table thead {
+  border-bottom: 1px solid #000;
+}
+
+.bill-content-wrapper.thermal-print-style table tbody {
+  border-top: 1px solid #000;
+}
+
+.bill-content-wrapper.thermal-print-style .text-align-left {
+  text-align: left !important;
+}
+.bill-content-wrapper.thermal-print-style .text-align-right {
+  text-align: right !important;
+}
+
+.bill-content-wrapper.thermal-print-style .signature {
+  height: auto;
+  border: none;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.bill-content-wrapper.thermal-print-style .d-flex {
+  display: block !important;
+}
+.bill-content-wrapper.thermal-print-style .justify-content-between {
+  justify-content: flex-start !important;
+}
+
+/* === Print Layout Overrides === */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #bill-viewer-content, #bill-viewer-content * {
+    visibility: visible;
+  }
+  #bill-viewer-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  .bill-viewer-actions {
+    display: none !important;
+  }
+
+  .item-table-mobile {
+    display: none !important;
+  }
+  .item-table-desktop {
+    display: block !important;
+  }
+}
+
+/* === Custom Layout Utilities === */
+.double-column-container {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.column-table {
+  width: 48%;
+}
+
+.double-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.double-table th,
+.double-table td {
+  border: 1px solid #999;
+  padding: 4px 8px;
+  text-align: left;
+}
+
+.column-table h5 {
+  display: none;
+}
+
+.double-table th:first-child {
+  font-weight: bold;
+}
+
+.bill-content-wrapper .items-heading {
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+/* === Layout Switching === */
+.item-table-mobile {
+  display: block;
+}
+.item-table-desktop {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .item-table-mobile {
+    display: none;
+  }
+  .item-table-desktop {
+    display: block;
+  }
+}
+
+/* Used by generateBillOutput() to control layout */
+.a4-output .item-table-desktop,
+.print-layout .item-table-desktop {
+  display: block !important;
+}
+.a4-output .item-table-mobile,
+.print-layout .item-table-mobile {
+  display: none !important;
+}
+
+.thermal-output .item-table-mobile {
+  display: block !important;
+}
+.thermal-output .item-table-desktop {
+  display: none !important;
+}
+
+/* === Divider Styling === */
+hr {
+  border: 0;
+  border-top: 1px solid #999;
+}
+
+#edit-charges-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+#edit-charges-section {
+  background-color: #fdfdfd;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+#edit-charges-section.show {
+  display: block;
+}
+
+#edit-charges-section input {
+  font-size: 0.95rem;
+}
+
+.autocomplete-suggestions {
+  max-height: 200px;
+  overflow-y: auto;
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  z-index: 1050;
+}
+.autocomplete-suggestions .list-group-item {
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+#phone-suggestion-box {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  background-color: white;
+  z-index: 1000;
+}

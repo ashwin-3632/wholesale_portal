@@ -1,0 +1,32 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow read/write access to all documents in 'parties' and 'bills' collections.
+    // In a real-world scenario, you would implement more granular security rules
+    // based on user authentication and roles.
+    match /parties/{partyId} {
+      allow read, write: if true;
+    }
+
+    match /bills/{billId} {
+      allow read, write: if true;
+    }
+
+    // New: Allow read/write for payments collection
+    match /payments/{paymentId} {
+      allow read, write: if true;
+    }
+
+    // New: Allow read/write for metadata collection (for billCounter)
+    match /metadata/{docId} {
+      allow read, write: if true;
+    }
+
+    // You can also use a broader rule for development if preferred, but specific is better
+    /*
+    match /{document=**} {
+      allow read, write: if true; // For development, allow all access. REMOVE IN PRODUCTION
+    }
+    */
+  }
+}
